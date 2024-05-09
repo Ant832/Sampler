@@ -1,18 +1,20 @@
 from pydub import AudioSegment
 from pydub.playback import play
 import os
-
+import tempfile
 
 class DrumKit:
     def __init__(self):
         __location__ = os.path.realpath(os.path.join(os.getcwd(), os.path.dirname(__file__)))
 
+        temp_dir = os.path.join(__location__, 'tmpSounds')
+        tempfile.tempdir = temp_dir
+        
         self.sounds = ['kick', 'hihat']
-
-        self.silence = AudioSegment.from_wav(open(os.path.join(__location__, 'silence.wav'), "rb"))
-        self.hihat = AudioSegment.from_wav(open(os.path.join(__location__, 'hihat.wav'), "rb"))
-        self.kick = AudioSegment.from_wav(open(os.path.join(__location__, 'kick.wav'), "rb"))
-        self.tom = AudioSegment.from_wav(open(os.path.join(__location__, 'tom.wav'), "rb"))
+        self.silence = AudioSegment.from_wav(os.path.join(__location__, 'silence.wav'))
+        self.hihat = AudioSegment.from_wav(os.path.join(__location__, 'hihat.wav'))
+        self.kick = AudioSegment.from_wav(os.path.join(__location__, 'kick.wav'))
+        self.tom = AudioSegment.from_wav(os.path.join(__location__, 'tom.wav'))
     
     def play_kick(self):
         play(self.kick)

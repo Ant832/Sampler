@@ -1,9 +1,10 @@
 from gui import QTGUI
 from sounds import DrumKit
-from PySide6.QtWidgets import QApplication
+from PySide6.QtWidgets import QApplication, QMessageBox, QPushButton
 from PySide6.QtCore import QEventLoop, QTimer
 import sys
 import threading
+from record import RecSample
 
 class Looper:
     def __init__(self):
@@ -12,6 +13,7 @@ class Looper:
         self.time_bool = False
 
         self.drums = DrumKit()
+        self.mic_use = RecSample()
 
         self.app = QApplication(sys.argv)
         # self.app.aboutToQuit.connect(self.exit_handler)
@@ -34,8 +36,21 @@ class Looper:
         self.loop_grid()
     
     def button_activation(self):
+        self.gui.record_menu.addAction("Open Recording Page", self.record_dialog)
         self.gui.start_button.clicked.connect(self.set_time_bool)
     
+    def record_dialog(self):
+        dialog = QMessageBox()
+        self.record_button = QPushButton()
+        self.record_button.setText("Record")
+        dialog.addButton(self.record_button, dialog.ButtonRole(1))
+        dialog.setStyleSheet("background: rgb(200, 200, 200);")
+        self.record_button.clicked.connect(self.start_recording)
+        _ = dialog.exec()    
+
+    def start_recording(self):
+        self.mic_use.recording()
+        
     def loop_grid(self):
         while self.time_bool:
             for row in range(4):
@@ -52,7 +67,7 @@ class Looper:
                     
                     # bpm
                     loop = QEventLoop()
-                    QTimer.singleShot(250, loop.quit)
+                    QTimer.singleShot(200, loop.quit)
                     loop.exec()
                     
                     # turns off red
@@ -75,23 +90,19 @@ class Looper:
             self.drums.play_tom()
 
     def add_sounds(self):
-        self.gui.rows[0].itemAt(0).widget().setText("kick")
-        self.gui.rows[1].itemAt(0).widget().setText("kick")
-        self.gui.rows[2].itemAt(0).widget().setText("kick")
-        self.gui.rows[3].itemAt(0).widget().setText("kick")
+        for i in range(4):
+            for j in range(4):
+                self.gui.rows[i].itemAt(j).widget().append("hihat")
+        
+        self.gui.rows[0].itemAt(0).widget().append("kick")
+        self.gui.rows[1].itemAt(0).widget().append("kick")
+        self.gui.rows[1].itemAt(1).widget().append("kick")
+        self.gui.rows[2].itemAt(1).widget().append("kick")
+        self.gui.rows[3].itemAt(0).widget().append("kick")
+        self.gui.rows[3].itemAt(1).widget().append("kick")
 
-        self.gui.rows[0].itemAt(3).widget().setText("hihattom")
-        self.gui.rows[1].itemAt(3).widget().setText("hihat")
-        self.gui.rows[2].itemAt(3).widget().setText("hihattom")
-        self.gui.rows[3].itemAt(3).widget().setText("hihat")
-
-        self.gui.rows[1].itemAt(1).widget().setText("kickhihat")
-        self.gui.rows[3].itemAt(1).widget().setText("kickhihat")
-
-        self.gui.rows[0].itemAt(1).widget().setText("tom")
-        self.gui.rows[0].itemAt(2).widget().setText("tom")
-        self.gui.rows[2].itemAt(1).widget().setText("tom")
-        self.gui.rows[2].itemAt(2).widget().setText("tom")
+        for i in range(4):
+            self.gui.rows[i].itemAt(2).widget().append("tom")
 
 
 def main():

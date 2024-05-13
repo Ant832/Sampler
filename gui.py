@@ -1,4 +1,4 @@
-from PySide6.QtWidgets import QWidget, QMainWindow, QGridLayout, QTextEdit, QHBoxLayout, QPushButton, QVBoxLayout
+from PySide6.QtWidgets import QWidget, QMainWindow, QGridLayout, QTextEdit, QHBoxLayout, QPushButton, QVBoxLayout, QMenu, QMessageBox
 
 class QTGUI(QMainWindow):
     def __init__(self):
@@ -14,6 +14,7 @@ class QTGUI(QMainWindow):
 
         self.make_box()
         self.make_buttons()
+        self.create_menu_bar()
 
         self.main_layout.addLayout(self.grid_layout)
         self.main_layout.addLayout(self.button_layout)
@@ -39,4 +40,9 @@ class QTGUI(QMainWindow):
         self.start_button.setText("Start")
 
         self.button_layout.addWidget(self.start_button)
-#testing repo
+    
+    def create_menu_bar(self):
+        menu_bar = self.menuBar()
+        self.record_menu = QMenu("&Record Sample", self)
+        menu_bar.addMenu(self.record_menu)
+        menu_bar.setStyleSheet(f"background-color: rgb(200, 200, 200);")

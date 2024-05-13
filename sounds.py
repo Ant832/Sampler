@@ -15,6 +15,10 @@ class DrumKit:
         self.hihat = AudioSegment.from_wav(os.path.join(__location__, 'hihat.wav'))
         self.kick = AudioSegment.from_wav(os.path.join(__location__, 'kick.wav'))
         self.tom = AudioSegment.from_wav(os.path.join(__location__, 'tom.wav'))
+        self.output = AudioSegment.from_wav(os.path.join(__location__, 'output.wav'))
+    
+    def play_output(self):
+        play(self.output)
     
     def play_kick(self):
         play(self.kick)

@@ -10,7 +10,7 @@ class DrumKit:
         temp_dir = os.path.join(__location__, 'tmpSounds')
         tempfile.tempdir = temp_dir
         
-        self.sounds = ['kick', 'hihat']
+        self.sounds = ['kick', 'hihat', 'tom', 'output']
         self.silence = AudioSegment.from_wav(os.path.join(__location__, 'silence.wav'))
         self.hihat = AudioSegment.from_wav(os.path.join(__location__, 'hihat.wav'))
         self.kick = AudioSegment.from_wav(os.path.join(__location__, 'kick.wav'))
@@ -45,6 +45,13 @@ class DrumKit:
         hihat_tom = self.hihat.overlay(self.tom)
         hihat_tom_kick = hihat_tom.overlay(self.kick)
         play(hihat_tom_kick)
+
+new = DrumKit()
+new.play_output()
+# new.play_hihat_tom()
+play(AudioSegment.from_wav('C:\\Users\\antny\\ProgrammingProjects\\Sampler\\output.wav'))
+print('done')
+
 
 # drums = DrumKit()
 # drums.play_kick_hihat()

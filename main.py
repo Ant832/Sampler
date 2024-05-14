@@ -12,6 +12,8 @@ class Looper:
         self.box_rgb = "207, 35, 35"
         self.time_bool = False
 
+        self.sounds = ["kick", "tom", "hihat", "output"]
+
         self.drums = DrumKit()
         self.mic_use = RecSample()
 
@@ -50,6 +52,7 @@ class Looper:
 
     def start_recording(self):
         self.mic_use.recording()
+        self.drums = DrumKit()
         
     def loop_grid(self):
         while self.time_bool:
@@ -74,20 +77,32 @@ class Looper:
                     current_box.setStyleSheet(f"background-color: rgb(255, 255, 255)")
     
     def play_sounds(self, current_box):
-        if 'kick' in current_box.toPlainText() and 'hihat' in current_box.toPlainText() and 'tom' in current_box.toPlainText():
+        current_sounds = []
+        text = current_box.toPlainText()
+        for i in range(len(self.sounds)):
+            if self.sounds[i] in text:
+                current_sounds.append(self.sounds[i])
+        print(current_sounds)
+
+        
+        
+        #plz deprecate this
+        if 'kick' in current_sounds and 'hihat' in current_sounds and 'tom' in current_sounds:
             self.drums.play_hihat_tom_kick()
-        elif 'hihat' in current_box.toPlainText() and 'tom' in current_box.toPlainText():
+        elif 'hihat' in current_sounds and 'tom' in current_sounds:
             self.drums.play_hihat_tom()
-        elif 'kick' in current_box.toPlainText() and 'tom' in current_box.toPlainText():
+        elif 'kick' in current_sounds and 'tom' in current_sounds:
             self.drums.play_kick_tom()
-        elif 'kick' in current_box.toPlainText() and 'hihat' in current_box.toPlainText():
+        elif 'kick' in current_sounds and 'hihat' in current_sounds:
             self.drums.play_kick_hihat()
-        elif 'kick' in current_box.toPlainText():
+        elif 'kick' in current_sounds:
             self.drums.play_kick()
-        elif 'hihat' in current_box.toPlainText():
+        elif 'hihat' in current_sounds:
             self.drums.play_hihat()
-        elif 'tom' in current_box.toPlainText():
+        elif 'tom' in current_sounds:
             self.drums.play_tom()
+        elif 'output' in current_sounds:
+            self.drums.play_output()
 
     def add_sounds(self):
         for i in range(4):

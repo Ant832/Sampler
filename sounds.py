@@ -46,33 +46,13 @@ class DrumKit:
         hihat_tom_kick = hihat_tom.overlay(self.kick)
         play(hihat_tom_kick)
 
-new = DrumKit()
-new.play_output()
-# new.play_hihat_tom()
-play(AudioSegment.from_wav('C:\\Users\\antny\\ProgrammingProjects\\Sampler\\output.wav'))
-print('done')
 
+def main():
+    # new = DrumKit()
+    # new.play_output()
+    # new.play_hihat_tom()
+    play(AudioSegment.from_wav('C:\\Users\\antny\\ProgrammingProjects\\Sampler\\output.wav'))
+    print('done')
 
-# drums = DrumKit()
-# drums.play_kick_hihat()
-# silence = AudioSegment.from_wav('C:\\Users\\antny\\ProgrammingProjects\\sampler\\silence.wav')
-# hihat = AudioSegment.from_wav('C:\\Users\\antny\\ProgrammingProjects\\sampler\\hihat.wav')
-# kick = AudioSegment.from_wav('C:\\Users\\antny\\ProgrammingProjects\\sampler\\kick.wav')
-# hihat_loop = silence.overlay(hihat, times=0)
-
-# for i in range(32):
-#     hihat_loop = hihat_loop.overlay(hihat, position=i*250)
-
-# kick_loop = hihat_loop.overlay(kick, times=0)
-# for i in range(8):
-#     kick_loop = kick_loop.overlay(kick, position=i*1000)
-
-
-# start = time.time()
-# for _ in range(4):
-#     # play(silence)
-#     pass
-
-# end = time.time()
-# time_len = end - start
-# print(time_len)
+if __name__ == "__main__":
+    main()

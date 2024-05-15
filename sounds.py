@@ -51,7 +51,10 @@ def main():
     # new = DrumKit()
     # new.play_output()
     # new.play_hihat_tom()
-    play(AudioSegment.from_wav('C:\\Users\\antny\\ProgrammingProjects\\Sampler\\output.wav'))
+    try:
+        play(AudioSegment.from_wav('C:\\Users\\antny\\ProgrammingProjects\\Sampler\\output.wav'))
+    except Exception as e:
+        print("Error: ", e)
     print('done')
 
 if __name__ == "__main__":

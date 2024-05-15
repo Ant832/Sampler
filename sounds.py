@@ -16,35 +16,14 @@ class DrumKit:
         self.kick = AudioSegment.from_wav(os.path.join(__location__, 'kick.wav'))
         self.tom = AudioSegment.from_wav(os.path.join(__location__, 'tom.wav'))
         self.output = AudioSegment.from_wav(os.path.join(__location__, 'output.wav'))
-    
-    def play_output(self):
-        play(self.output)
-    
-    def play_kick(self):
-        play(self.kick)
+        self.sound_dict = {'kick': self.kick, 'hihat': self.hihat, 'tom': self.tom, 'output': self.output}
 
-    def play_hihat(self):
-        play(self.hihat)
     
-    def play_kick_hihat(self):
-        kick_hihat = self.kick.overlay(self.hihat)
-        play(kick_hihat)
-
-    def play_tom(self):
-        play(self.tom)
-    
-    def play_kick_tom(self):
-        kick_tom = self.kick.overlay(self.tom)
-        play(kick_tom)
-    
-    def play_hihat_tom(self):
-        hihat_tom = self.hihat.overlay(self.tom)
-        play(hihat_tom)
-
-    def play_hihat_tom_kick(self):
-        hihat_tom = self.hihat.overlay(self.tom)
-        hihat_tom_kick = hihat_tom.overlay(self.kick)
-        play(hihat_tom_kick)
+    def create_sound(self, sounds):
+        main_sound = self.sound_dict[sounds[0]]
+        for sound in range(1, len(sounds)):
+            main_sound = main_sound.overlay(self.sound_dict[sounds[sound]])
+        play(main_sound)
 
 
 def main():

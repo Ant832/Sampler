@@ -70,7 +70,7 @@ class Looper:
                     
                     # bpm
                     loop = QEventLoop()
-                    QTimer.singleShot(200, loop.quit)
+                    QTimer.singleShot(150, loop.quit)
                     loop.exec()
                     
                     # turns off red
@@ -82,27 +82,8 @@ class Looper:
         for i in range(len(self.sounds)):
             if self.sounds[i] in text:
                 current_sounds.append(self.sounds[i])
-        print(current_sounds)
-
         
-        
-        #plz deprecate this
-        if 'kick' in current_sounds and 'hihat' in current_sounds and 'tom' in current_sounds:
-            self.drums.play_hihat_tom_kick()
-        elif 'hihat' in current_sounds and 'tom' in current_sounds:
-            self.drums.play_hihat_tom()
-        elif 'kick' in current_sounds and 'tom' in current_sounds:
-            self.drums.play_kick_tom()
-        elif 'kick' in current_sounds and 'hihat' in current_sounds:
-            self.drums.play_kick_hihat()
-        elif 'kick' in current_sounds:
-            self.drums.play_kick()
-        elif 'hihat' in current_sounds:
-            self.drums.play_hihat()
-        elif 'tom' in current_sounds:
-            self.drums.play_tom()
-        elif 'output' in current_sounds:
-            self.drums.play_output()
+        self.drums.create_sound(current_sounds)
 
     def add_sounds(self):
         for i in range(4):

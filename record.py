@@ -9,7 +9,7 @@ class RecSample:
         self.__location__ = os.path.realpath(os.path.join(os.getcwd(), os.path.dirname(__file__)))
         self.fs = 44100  # Sample rate
         # self.fs = 22050  # Sample rate
-        self.seconds = 0.2  # Duration of recording
+        self.seconds = 0.1  # Duration of recording
 
     def recording(self):
         myrecording = sd.rec(int(self.seconds * self.fs), samplerate=self.fs, channels=2)

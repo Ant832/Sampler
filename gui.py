@@ -1,14 +1,27 @@
-from PySide6.QtWidgets import QWidget, QMainWindow, QGridLayout, QTextEdit, QHBoxLayout, QPushButton, QVBoxLayout, QMenu, QMessageBox
+"""
+GUI setup
+"""
+
+from PySide6.QtWidgets import QWidget, QMainWindow, QGridLayout, QTextEdit, QHBoxLayout, QPushButton, QVBoxLayout, QMenu
 
 
 class QTGUI(QMainWindow):
+    """
+    Main gui class
+    """
     def __init__(self):
         super().__init__()
         self.setWindowTitle("Sampler")
         self.setGeometry(100, 100, 700, 500)
+        self.start_button = QPushButton()
+        self.record_menu = QMenu("&Record Sample", self)
+        self.rows = []
         self.make_grid()
-    
+
     def make_grid(self):
+        """
+        QT layouts
+        """
         self.main_layout = QVBoxLayout()
         self.grid_layout = QGridLayout()
         self.button_layout = QHBoxLayout()
@@ -23,27 +36,32 @@ class QTGUI(QMainWindow):
         central_widget = QWidget()
         central_widget.setLayout(self.main_layout)
         self.setCentralWidget(central_widget)
-    
+
     def make_box(self):
-        self.rows = []
+        """
+        Creates grid of 16 boxes
+        """
         for i in range(4):
-            self.row = QHBoxLayout()
-            self.rows.append(self.row)
+            row = QHBoxLayout()
+            self.rows.append(row)
             for _ in range(4):
-                self.box = QTextEdit()
-                self.box.setStyleSheet("background-color: rgb(255, 255, 255)")
-                # self.box.setReadOnly(True)
-                self.row.addWidget(self.box)
-            self.grid_layout.addLayout(self.row, i, 0)
-    
+                box = QTextEdit()
+                box.setStyleSheet("background-color: rgb(255, 255, 255)")
+                row.addWidget(box)
+            self.grid_layout.addLayout(row, i, 0)
+
     def make_buttons(self):
-        self.start_button = QPushButton()
+        """
+        Creates buttons on main gui
+        """
         self.start_button.setText("Start")
 
         self.button_layout.addWidget(self.start_button)
-    
+
     def create_menu_bar(self):
+        """
+        Creates menu bar on main gui
+        """
         menu_bar = self.menuBar()
-        self.record_menu = QMenu("&Record Sample", self)
         menu_bar.addMenu(self.record_menu)
-        menu_bar.setStyleSheet(f"background-color: rgb(200, 200, 200);")
+        menu_bar.setStyleSheet("background-color: rgb(200, 200, 200);")

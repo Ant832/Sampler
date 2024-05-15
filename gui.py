@@ -1,5 +1,6 @@
 from PySide6.QtWidgets import QWidget, QMainWindow, QGridLayout, QTextEdit, QHBoxLayout, QPushButton, QVBoxLayout, QMenu, QMessageBox
 
+
 class QTGUI(QMainWindow):
     def __init__(self):
         super().__init__()

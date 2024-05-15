@@ -6,6 +6,7 @@ import sys
 import threading
 from record import RecSample
 
+
 class Looper:
     def __init__(self):
         self.cur = (0, 0)

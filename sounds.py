@@ -3,6 +3,7 @@ from pydub.playback import play
 import os
 import tempfile
 
+
 class DrumKit:
     def __init__(self):
         __location__ = os.path.realpath(os.path.join(os.getcwd(), os.path.dirname(__file__)))
@@ -17,7 +18,6 @@ class DrumKit:
         self.tom = AudioSegment.from_wav(os.path.join(__location__, 'tom.wav'))
         self.output = AudioSegment.from_wav(os.path.join(__location__, 'output.wav'))
         self.sound_dict = {'kick': self.kick, 'hihat': self.hihat, 'tom': self.tom, 'output': self.output}
-
     
     def create_sound(self, sounds):
         main_sound = self.sound_dict[sounds[0]]
@@ -35,6 +35,7 @@ def main():
     except Exception as e:
         print("Error: ", e)
     print('done')
+
 
 if __name__ == "__main__":
     main()

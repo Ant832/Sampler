@@ -20,7 +20,7 @@ class Looper:
         self.box_rgb = "207, 35, 35"
         self.time_bool = False
 
-        self.sounds = ["kick", "tom", "hihat", "output"]
+        self.sounds = ["kick", "tom", "hihat"]
 
         self.drums = DrumKit()
         self.mic_use = RecSample()
@@ -76,8 +76,10 @@ class Looper:
         Uses sounds.py to record audio
         Reinitializes Drumkit to update new user sound
         """
-        self.mic_use.recording()
-        self.drums = DrumKit()
+        sound_counter = 0
+        self.mic_use.recording(sound_counter)
+        self.drums.create_sample(sound_counter)
+        sound_counter += 1
 
     def loop_grid(self):
         """
@@ -111,9 +113,12 @@ class Looper:
         current_sounds = []
         text = current_box.toPlainText()
         for i in range(len(self.sounds)):
+            if "output" in text:
+                new_output = text[text.index("output"):text.index("output")+7]
+                if new_output not in current_sounds:
+                    current_sounds.append(new_output)
             if self.sounds[i] in text:
                 current_sounds.append(self.sounds[i])
-
         self.drums.create_sound(current_sounds) # plays sounds
 
     def add_sounds(self):

@@ -18,11 +18,11 @@ class RecSample:
         # self.fs = 22050  # Sample rate
         self.seconds = 0.1  # Duration of recording
 
-    def recording(self):
+    def recording(self, num):
         """
         Records and saves sound to output.wav
         """
         myrecording = sd.rec(int(self.seconds * self.fs), samplerate=self.fs, channels=2)
         sd.wait()  # Wait until recording is finished
-        write(f'{self.__location__}/output.wav', self.fs, myrecording)  # Save as WAV file
-        wv.write(f'{self.__location__}/output.wav', myrecording, self.fs, sampwidth=2)
+        write(f'{self.__location__}\\sound_files\\output{num}.wav', self.fs, myrecording)  # Save as WAV file
+        wv.write(f'{self.__location__}\\sound_files\\output{num}.wav', myrecording, self.fs, sampwidth=2)

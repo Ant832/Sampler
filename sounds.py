@@ -3,9 +3,13 @@ Class and interface for DrumKit sounds
 """
 
 import os
+import sys
 import tempfile
 from pydub import AudioSegment
 from pydub.playback import play
+
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+sys.path.append(os.path.dirname(SCRIPT_DIR))
 
 
 class DrumKit:
@@ -20,11 +24,11 @@ class DrumKit:
         tempfile.tempdir = temp_dir
 
         self.sounds = ['kick', 'hihat', 'tom', 'output']
-        self.silence = AudioSegment.from_wav(os.path.join(__location__, 'silence.wav'))
-        self.hihat = AudioSegment.from_wav(os.path.join(__location__, 'hihat.wav'))
-        self.kick = AudioSegment.from_wav(os.path.join(__location__, 'kick.wav'))
-        self.tom = AudioSegment.from_wav(os.path.join(__location__, 'tom.wav'))
-        self.output = AudioSegment.from_wav(os.path.join(__location__, 'output.wav'))
+        self.silence = AudioSegment.from_wav(os.path.join(f"{__location__}/sound_files", 'silence.wav'))
+        self.hihat = AudioSegment.from_wav(os.path.join(f"{__location__}/sound_files", 'hihat.wav'))
+        self.kick = AudioSegment.from_wav(os.path.join(f"{__location__}/sound_files", 'kick.wav'))
+        self.tom = AudioSegment.from_wav(os.path.join(f"{__location__}/sound_files", 'tom.wav'))
+        self.output = AudioSegment.from_wav(os.path.join(f"{__location__}/sound_files", 'output.wav'))
         self.sound_dict = {'kick': self.kick, 'hihat': self.hihat, \
                            'tom': self.tom, 'output': self.output}
 

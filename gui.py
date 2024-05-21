@@ -14,6 +14,9 @@ class QTGUI(QMainWindow):
         self.setWindowTitle("Sampler")
         self.setGeometry(100, 100, 700, 500)
         self.start_button = QPushButton()
+        self.view_kick = QPushButton()
+        self.view_tom = QPushButton()
+        self.view_hihat = QPushButton()
         self.record_menu = QMenu("&Record Sample", self)
         self.rows = []
         self.make_grid()
@@ -24,7 +27,8 @@ class QTGUI(QMainWindow):
         """
         self.main_layout = QVBoxLayout()
         self.grid_layout = QGridLayout()
-        self.button_layout = QHBoxLayout()
+        self.button_layout = QVBoxLayout()
+        self.view_layout = QHBoxLayout()
 
         self.make_box()
         self.make_buttons()
@@ -32,6 +36,7 @@ class QTGUI(QMainWindow):
 
         self.main_layout.addLayout(self.grid_layout)
         self.main_layout.addLayout(self.button_layout)
+        self.main_layout.addLayout(self.view_layout)
 
         central_widget = QWidget()
         central_widget.setLayout(self.main_layout)
@@ -54,9 +59,18 @@ class QTGUI(QMainWindow):
         """
         Creates buttons on main gui
         """
-        self.start_button.setText("Start")
+        self.view_kick.setText("View Kick")
+        self.view_tom.setText("View Tom")
+        self.view_hihat.setText("View Hihat")
+        self.view_layout.addWidget(self.view_kick)
+        self.view_layout.addWidget(self.view_tom)
+        self.view_layout.addWidget(self.view_hihat)
 
+
+        self.start_button.setText("Start")
         self.button_layout.addWidget(self.start_button)
+        
+        
 
     def create_menu_bar(self):
         """

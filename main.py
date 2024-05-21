@@ -58,6 +58,9 @@ class Looper:
         """
         self.gui.record_menu.addAction("Open Recording Page", self.record_dialog)
         self.gui.start_button.clicked.connect(self.set_time_bool)
+        self.gui.view_kick.clicked.connect(self.drums.view_sound)
+        # self.gui.view_kick.clicked.connect(lambda: self.drums.view_sound("tom"))
+        # self.gui.view_kick.clicked.connect(lambda: self.drums.view_sound("hihat"))
 
     def record_dialog(self):
         """
@@ -76,10 +79,10 @@ class Looper:
         Uses sounds.py to record audio
         Reinitializes Drumkit to update new user sound
         """
-        sound_counter = 0
-        self.mic_use.recording(sound_counter)
-        self.drums.create_sample(sound_counter)
-        sound_counter += 1
+        print(self.drums.sound_counter)
+        self.mic_use.recording(self.drums.sound_counter)
+        self.drums.sound_counter += 1
+        self.drums.create_sample()
 
     def loop_grid(self):
         """

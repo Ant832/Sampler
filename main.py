@@ -58,9 +58,9 @@ class Looper:
         """
         self.gui.record_menu.addAction("Open Recording Page", self.record_dialog)
         self.gui.start_button.clicked.connect(self.set_time_bool)
-        self.gui.view_kick.clicked.connect(self.drums.view_sound)
-        # self.gui.view_kick.clicked.connect(lambda: self.drums.view_sound("tom"))
-        # self.gui.view_kick.clicked.connect(lambda: self.drums.view_sound("hihat"))
+        self.gui.view_kick.clicked.connect(lambda: self.drums.view_sound("kick"))
+        self.gui.view_tom.clicked.connect(lambda: self.drums.view_sound("tom"))
+        self.gui.view_hihat.clicked.connect(lambda: self.drums.view_sound("hihat"))
 
     def record_dialog(self):
         """

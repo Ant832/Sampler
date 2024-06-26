@@ -63,7 +63,7 @@ class DrumKit:
                 config_file.write(f"{self.sound_counter}\n")
             self.sound_counter += 1
         elif new is None:
-            with open(f"{self.__location__}\\config.ini", "r") as config_file:
+            with open(f"{self.__location__}//config.ini", "r") as config_file:
                 lines = config_file.readlines()
                 self.sound_counter = int(lines[0])
                 for line in range(len(lines)):
@@ -75,11 +75,11 @@ class DrumKit:
                     elif "output" not in lines[line][0]:
                         self.sound_dict[lines[line][0]] = self.sound_dict[lines[line][0]]
                 
-    def view_sound(self):
+    def view_sound(self, sound_wave):
         """
         Visualizes sound wave
         """
-        show_sound = self.kick
+        show_sound = self.sound_dict[sound_wave]
         samples = show_sound.get_array_of_samples()
 
         # Example operation on audio data
